@@ -5,16 +5,18 @@ import ContactList from './ContactList';
 import Filter from './Filter';
 
 export default class App extends Component {
-  static defaultProps = {};
-
-  static propTypes = {};
-
   state = {
     contacts: [
       { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
       { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
       { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
       { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
+      { id: 'id-5', name: '111', number: '227-91-26' },
+      { id: 'id-6', name: '1111', number: '227-91-26' },
+      { id: 'id-7', name: '1112', number: '227-91-26' },
+      { id: 'id-8', name: '1113', number: '227-91-26' },
+      { id: 'id-9', name: '1114', number: '227-91-26' },
+      { id: 'id-10', name: '1115', number: '227-91-26' },
     ],
     filter: '',
   };
@@ -61,8 +63,19 @@ export default class App extends Component {
         {contacts.length >= 2 && (
           <Filter filter={this.state.filter} handleFilter={this.handleFilter} />
         )}
-
-        <ContactList contacts={filterView} removeContact={this.removeContact} />
+        {filterView.length > 0 ? (
+          <ContactList
+            contacts={filterView}
+            onRemoveContact={this.removeContact}
+          />
+        ) : (
+          contacts.length !== 0 && (
+            <ContactList
+              contacts={contacts}
+              onRemoveContact={this.removeContact}
+            />
+          )
+        )}
       </div>
     );
   }

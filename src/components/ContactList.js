@@ -1,16 +1,16 @@
 import React from 'react';
 import propTypes from 'prop-types';
-import ContactsLi from './ContactsLi';
+import ContactListItem from './ContactListItem';
 
-function ContactList({ contacts, removeContact }) {
+function ContactList({ contacts, onRemoveContact }) {
   return (
     <ul>
       {contacts.map(({ id, name, number }) => (
-        <ContactsLi
+        <ContactListItem
           key={id}
           name={name}
           number={number}
-          remove={() => removeContact(id)}
+          onRemove={() => onRemoveContact(id)}
         />
       ))}
     </ul>
@@ -22,7 +22,7 @@ ContactList.propTypes = {
       propTypes.exact({
         id: propTypes.string.isRequired,
         name: propTypes.string.isRequired,
-        number: propTypes.string.isRequired,
+        number: propTypes.number.isRequired,
       }),
     ),
     propTypes.array,
